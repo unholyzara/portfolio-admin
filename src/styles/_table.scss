@@ -1,0 +1,102 @@
+@use "tokens" as *;
+
+.toolbar {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 1.25rem;
+
+	&__search {
+		flex: 0 1 26rem;
+	}
+}
+
+.table-wrap {
+	overflow-x: auto;
+}
+
+.table {
+	width: 100%;
+	border-collapse: collapse;
+
+	th,
+	td {
+		padding: 0.9rem 1rem 0.9rem 0;
+		border-bottom: $line solid $raised;
+		text-align: left;
+		vertical-align: top;
+	}
+
+	th {
+		padding-top: 0.5rem;
+		border-bottom: $line-heavy solid $bone;
+		color: $muted;
+		font-size: 0.875rem;
+		font-weight: 600;
+		white-space: nowrap;
+	}
+
+	tbody tr:hover {
+		background: $raised;
+	}
+
+	tr.is-inactive td:not(.table__actions):not(.table__active) {
+		opacity: 0.55;
+	}
+
+	&__sort {
+		display: inline-flex;
+		gap: 0.4rem;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: inherit;
+		font-weight: 600;
+		cursor: pointer;
+
+		&:hover {
+			color: $bone;
+		}
+	}
+
+	&__arrow {
+		min-width: 0.8rem;
+		color: $accent;
+		font-size: 0.7rem;
+	}
+
+	&__link {
+		font-weight: 600;
+		text-decoration-thickness: 2px;
+		text-underline-offset: 4px;
+
+		&:hover {
+			color: $accent;
+		}
+	}
+
+	&__actions {
+		display: flex;
+		gap: 0.6rem;
+		justify-content: flex-end;
+		white-space: nowrap;
+	}
+
+	&__actions-head {
+		width: 1%;
+	}
+}
+
+.empty {
+	display: grid;
+	gap: 1.5rem;
+	justify-items: start;
+	max-width: 32rem;
+	padding: 2rem;
+	border: $line-heavy dashed $bone;
+
+	&__text {
+		font-family: $font-display;
+		font-size: 1.5rem;
+		line-height: 1.1;
+	}
+}

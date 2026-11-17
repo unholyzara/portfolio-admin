@@ -1,0 +1,66 @@
+@use 'tokens' as *;
+
+.login {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  min-height: 100vh;
+
+  @include below(60rem) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  &__lead {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem clamp(1.5rem, 4vw, 4rem) 3rem;
+    border-right: $line-heavy solid $bone;
+
+    @include below(60rem) {
+      min-height: 40vh;
+      border-right: 0;
+      border-bottom: $line-heavy solid $bone;
+    }
+  }
+
+  &__site {
+    font-family: $font-display;
+    font-size: 1.25rem;
+  }
+
+  &__title {
+    font-family: $font-display;
+    font-size: clamp(4rem, 14vw, 13rem);
+    font-weight: 400;
+    line-height: 0.82;
+    letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
+  }
+
+  &__panel {
+    display: grid;
+    align-content: center;
+    gap: 1.5rem;
+    padding: 3rem clamp(1.5rem, 4vw, 3.5rem);
+    background: $raised;
+  }
+
+  &__heading {
+    font-family: $font-display;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  &__field {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  &__label {
+    font-weight: 600;
+  }
+
+  &__submit {
+    justify-self: start;
+  }
+}

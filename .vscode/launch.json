@@ -1,0 +1,14 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Serve",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:4300",
+			"webRoot": "${workspaceFolder}",
+			"preLaunchTask": "vite: dev",
+			"postDebugTask": "vite: stop"
+		}
+	]
+}

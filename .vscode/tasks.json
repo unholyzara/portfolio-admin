@@ -1,0 +1,40 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "vite: dev",
+			"type": "shell",
+			"command": "npm run dev -- --host",
+			"isBackground": true,
+			"problemMatcher": {
+				"owner": "vite",
+				"pattern": {
+					"regexp": "^$"
+				},
+				"background": {
+					"activeOnStart": true,
+					"beginsPattern": "VITE",
+					"endsPattern": "Local:"
+				}
+			},
+			"presentation": {
+				"reveal": "silent",
+				"panel": "dedicated"
+			}
+		},
+		{
+			"label": "vite: stop",
+			"type": "shell",
+			"command": "echo ${input:terminateDev}",
+			"problemMatcher": []
+		}
+	],
+	"inputs": [
+		{
+			"id": "terminateDev",
+			"type": "command",
+			"command": "workbench.action.tasks.terminate",
+			"args": "vite: dev"
+		}
+	]
+}

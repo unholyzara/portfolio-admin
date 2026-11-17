@@ -1,0 +1,24 @@
+$ground: #0e0f10;
+$raised: #1b1c1f;
+$sunken: #070808;
+$bone: #ebe7da;
+$muted: #9d9a92;
+$accent: #5b8cff;
+$danger: #ff5a47;
+$ok: #6fe39a;
+
+$line: 2px;
+$line-heavy: 4px;
+$shadow: 4px;
+
+$font-display: "Archivo Black", "Arial Black", Impact, sans-serif;
+$font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+
+$navbar-height: 3.75rem;
+$sidebar-width: 17rem;
+
+@mixin below($width) {
+	@media (max-width: $width) {
+		@content;
+	}
+}

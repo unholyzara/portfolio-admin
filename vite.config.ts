@@ -12,9 +12,8 @@ export default defineConfig({
     port: 4300,
     proxy: {
       '/api': {
-        target: process.env.API_PROXY_TARGET ?? 'http://localhost',
-        changeOrigin: false,
-        rewrite: (path) => path.replace(/^\/api/, ''),
+        target: 'http://localhost',
+        changeOrigin: true,
       },
     },
   },

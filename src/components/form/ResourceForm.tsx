@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import { useForm, type FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { ApiError } from '../../api/client';
@@ -18,6 +18,7 @@ export interface ResourceFormProps {
   onSaved: (result: SubmitResult) => void;
   onCancel?: () => void;
   submitLabel: string;
+  children?: ReactNode;
 }
 
 const isVisible = (entry: FormEntry, locked: string[]) =>
@@ -41,6 +42,7 @@ export function ResourceForm({
   onSaved,
   onCancel,
   submitLabel,
+  children,
 }: ResourceFormProps) {
   const entries = useMemo(
     () => resource.entries.filter((entry) => isVisible(entry, lockedFields)),
@@ -149,6 +151,8 @@ export function ResourceForm({
           </div>
         );
       })}
+
+      {children}
 
       <div className="form__footer">
         <div className="form__status" aria-live="polite">

@@ -7,10 +7,10 @@ export const listKey = (endpoint: string) => ['list', endpoint] as const;
 export const singletonKey = (endpoint: string) => ['singleton', endpoint] as const;
 export const siteSettingsKey = ['site-settings'] as const;
 
-const fetchList = (endpoint: string) => request<ApiItem[]>(endpoint);
+const fetchList = <T extends ApiItem = ApiItem>(endpoint: string) => request<T[]>(endpoint);
 
-export const useList = (endpoint: string) =>
-  useQuery({ queryKey: listKey(endpoint), queryFn: () => fetchList(endpoint) });
+export const useList = <T extends ApiItem = ApiItem>(endpoint: string) =>
+  useQuery({ queryKey: listKey(endpoint), queryFn: () => fetchList<T>(endpoint) });
 
 export const useItem = (endpoint: string, uuid: string | undefined) =>
   useQuery({

@@ -29,13 +29,7 @@ export const NAV: NavItem[] = [
       { label: 'Mansioni', to: '/work/mansioni' },
     ],
   },
-  {
-    label: 'Progetti',
-    children: [
-      { label: 'Progetti', to: '/progetti/progetti' },
-      { label: 'Repositories', to: '/progetti/repositories' },
-    ],
-  },
+  { label: 'Progetti', to: '/progetti/progetti' },
   {
     label: 'Impostazioni',
     children: [{ label: 'Manutenzione', to: '/impostazioni/manutenzione' }],

@@ -16,6 +16,8 @@ describe('Sidebar', () => {
     renderAt('/');
     const labels = [...document.querySelectorAll('.nav__group, .nav__top')].map((node) => node.textContent);
     expect(labels).toEqual(['Persona', 'Education', 'Work', 'Progetti', 'Impostazioni']);
+    expect(screen.getByRole('link', { name: 'Progetti' })).toHaveAttribute('href', '/progetti/progetti');
+    expect(screen.queryByText('Repositories')).not.toBeInTheDocument();
   });
 
   it('keeps submenus collapsed until opened', async () => {

@@ -10,8 +10,9 @@ const endpoint = '/api/work/work-responsibility-staff/';
 interface Responsibility {
   uuid: string;
   active: boolean;
-  work_experience: string;
-  description_it: string;
+  work_experience: string | { uuid: string; title_it?: string };
+  description?: string;
+  description_it?: string;
   description_en: string | null;
   order: number;
 }
@@ -84,6 +85,23 @@ describe('WorkResponsibilities', () => {
         order: 1,
       },
     });
+  });
+
+  it('matches and displays responsibilities with a nested experience and localized description', async () => {
+    items = [{
+      uuid: 'responsibility-nested',
+      active: true,
+      work_experience: { uuid: experienceUuid, title_it: 'Engineer' },
+      description: 'Descrizione dalla response',
+      description_en: null,
+      order: 2,
+    }];
+    renderPanel();
+
+    expect(await screen.findByText('Descrizione dalla response')).toBeInTheDocument();
+    expect(within(screen.getByRole('list', { name: 'Mansioni in ordine' }))
+      .getByRole('listitem')).toBeInTheDocument();
+    expect(screen.queryByText('Nessuna mansione inserita.')).not.toBeInTheDocument();
   });
 
   it('deletes a responsibility only after confirmation', async () => {

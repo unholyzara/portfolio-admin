@@ -15,8 +15,12 @@ export const technologyLabel = (item: ApiItem) => firstText(item.name);
 
 export const projectLabel = (item: ApiItem) => firstText(item.title_it, item.title_en, item.title);
 
-export const workExperienceLabel = (item: ApiItem) => {
+export const workExperienceLabel = (
+  item: ApiItem | string | null | undefined,
+) => {
+  if (typeof item === 'string') return item;
+  if (!item) return '';
   const title = firstText(item.title_it, item.title_en, item.title);
   const company = item.company && typeof item.company === 'object' ? firstText(item.company.name) : '';
-  return company ? `${title} (${company})` : title;
+  return company ? `${title} (${company})` : title || firstText(item.uuid);
 };

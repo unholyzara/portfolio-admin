@@ -494,12 +494,32 @@ export const RESOURCES: Record<ResourceKey, ResourceDef> = {
 			{
 				key: "work_experience",
 				label: "Esperienza",
-				render: (item) =>
-					workExperienceLabel(item.work_experience ?? {}),
-				sortValue: (item) =>
-					workExperienceLabel(
-						item.work_experience ?? {},
-					).toLowerCase(),
+				render: (item) => {
+					const experience = item.work_experience;
+					if (experience && typeof experience === "object") {
+						return workExperienceLabel(experience);
+					}
+					if (typeof experience === "string") {
+						return (
+							<RelationCell
+								endpoint={ENDPOINTS.workExperience}
+								uuid={experience}
+								labelOf={workExperienceLabel}
+							/>
+						);
+					}
+					return "";
+				},
+				sortValue: (item) => {
+					const experience = item.work_experience;
+					return workExperienceLabel(
+						experience && typeof experience === "object"
+							? experience
+							: typeof experience === "string"
+								? experience
+								: null,
+					).toLowerCase();
+				},
 			},
 		],
 	},

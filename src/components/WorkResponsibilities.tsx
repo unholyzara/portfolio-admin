@@ -10,9 +10,14 @@ import { persistResponsibilityOrder, type OrderedResponsibility } from '../resou
 const endpoint = ENDPOINTS.workResponsibility;
 const MAX_ORDER = 32767;
 
+interface WorkExperienceReference extends ApiItem {
+  uuid: string;
+}
+
 interface WorkResponsibility extends ApiItem, OrderedResponsibility {
-  work_experience: string;
-  description_it: string;
+  work_experience: string | WorkExperienceReference;
+  description?: string;
+  description_it?: string;
   description_en?: string | null;
 }
 
@@ -39,9 +44,17 @@ const nextOrder = (items: ApiItem[]) => {
   throw new Error('Non è possibile aggiungere altre mansioni: raggiunto il numero massimo.');
 };
 
+const relatedExperienceUuid = (item: WorkResponsibility) =>
+  typeof item.work_experience === 'string'
+    ? item.work_experience
+    : item.work_experience?.uuid;
+
+const responsibilityDescription = (item: WorkResponsibility) =>
+  item.description_it ?? item.description ?? item.description_en ?? '';
+
 const orderedItems = (items: WorkResponsibility[], workExperienceUuid: string) =>
   items
-    .filter((item) => item.work_experience === workExperienceUuid)
+    .filter((item) => relatedExperienceUuid(item) === workExperienceUuid)
     .sort((a, b) => Number(a.order) - Number(b.order));
 
 export function WorkResponsibilities({
@@ -227,7 +240,7 @@ export function WorkResponsibilities({
               >
                 <div className="work-responsibilities__text">
                   <span className="work-responsibilities__number">{index + 1}</span>
-                  <p>{item.description_it}</p>
+                  <p>{responsibilityDescription(item)}</p>
                   {item.description_en && <p className="work-responsibilities__translation">{item.description_en}</p>}
                 </div>
                 <div className="work-responsibilities__actions">

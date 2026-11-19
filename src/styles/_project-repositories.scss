@@ -1,0 +1,143 @@
+@use 'tokens' as *;
+
+.project-repositories {
+  max-width: 62rem;
+  margin: 3rem 0 2rem;
+  padding-top: 1.75rem;
+  border-top: $line-heavy solid $bone;
+
+  &__heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+
+    h2,
+    h3 {
+      font-family: $font-display;
+      font-weight: 400;
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+    }
+
+    p {
+      margin-top: 0.5rem;
+      color: $muted;
+    }
+  }
+
+  &__count {
+    min-width: 2.5rem;
+    padding: 0.25rem 0.5rem;
+    border: $line solid $bone;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+  }
+
+  &__list {
+    display: grid;
+    gap: 0.75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    border: $line solid $bone;
+    background: $raised;
+    overflow-wrap: anywhere;
+
+    p + p {
+      margin-top: 0.35rem;
+    }
+
+    &--pending {
+      opacity: 0.7;
+      text-decoration: line-through;
+    }
+  }
+
+  &__url,
+  &__empty {
+    color: $muted;
+  }
+
+  &__actions {
+    display: flex;
+    flex: none;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  &__form {
+    display: grid;
+    gap: 0.75rem;
+    margin-top: 2rem;
+
+    h3 {
+      margin-bottom: 0.25rem;
+      font-family: $font-display;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
+
+    .btn {
+      justify-self: start;
+    }
+  }
+
+  &__controls {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) auto;
+    align-items: start;
+    gap: 1rem;
+
+    .btn {
+      justify-self: end;
+      white-space: nowrap;
+    }
+  }
+
+  &__pending {
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border: $line solid $danger;
+
+    ul {
+      display: grid;
+      gap: 0.5rem;
+      margin: 0.75rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    small {
+      display: block;
+      color: $muted;
+    }
+  }
+
+  @include below(48rem) {
+    &__item {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+}

@@ -9,10 +9,11 @@ import { ResourceFormPage } from './pages/ResourceFormPage';
 import { ResourceListPage } from './pages/ResourceListPage';
 import { SingletonPage } from './pages/SingletonPage';
 import { WorkExperienceFormPage } from './pages/WorkExperienceFormPage';
+import { ProjectFormPage } from './pages/ProjectFormPage';
 import { COLLECTIONS, RESOURCES } from './resources/definitions';
 
 const collectionRoutes: RouteObject[] = COLLECTIONS.filter(
-  (resource) => resource.key !== 'workExperience',
+  (resource) => resource.key !== 'workExperience' && resource.key !== 'project',
 ).flatMap((resource) => [
   { path: resource.path, element: <ResourceListPage resource={resource} /> },
   { path: `${resource.path}/new`, element: <ResourceFormPage resource={resource} mode="create" /> },
@@ -34,6 +35,9 @@ const routes: RouteObject[] = [
       { path: RESOURCES.workExperience.path, element: <ResourceListPage resource={RESOURCES.workExperience} /> },
       { path: `${RESOURCES.workExperience.path}/new`, element: <WorkExperienceFormPage mode="create" /> },
       { path: `${RESOURCES.workExperience.path}/:uuid`, element: <WorkExperienceFormPage mode="edit" /> },
+      { path: RESOURCES.project.path, element: <ResourceListPage resource={RESOURCES.project} /> },
+      { path: `${RESOURCES.project.path}/new`, element: <ProjectFormPage mode="create" /> },
+      { path: `${RESOURCES.project.path}/:uuid`, element: <ProjectFormPage mode="edit" /> },
       { path: 'impostazioni/manutenzione', element: <MaintenancePage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
